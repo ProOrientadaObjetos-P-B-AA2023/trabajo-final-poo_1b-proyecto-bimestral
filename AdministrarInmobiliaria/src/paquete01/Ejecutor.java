@@ -8,6 +8,7 @@ package paquete01;
 /**
  *
  * @author reroes
+ * @author Pablo Andres Criollo Alvarez
  */
 public class Ejecutor {
     

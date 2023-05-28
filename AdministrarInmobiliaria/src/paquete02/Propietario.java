@@ -1,5 +1,9 @@
 package paquete02;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Formatter;
+
 public class Propietario {
     //Atributos
     private String nombresPropietario;
@@ -37,5 +41,14 @@ public class Propietario {
 
     public String getIdentificacionPropietario() {
         return identificacionPropietario;
+    }
+    //Metodos
+    public void guardarObjeto() throws FileNotFoundException, IOException, ClassNotFoundException {
+        //Creacion del archivo
+        Formatter flujoSalida = new Formatter("./datos/propietarios.txt");
+        //Escritura en el archivo
+        flujoSalida.format("%s,%s,%s",getNombresPropietario(),getApellidosPropietario(),getIdentificacionPropietario());
+        //Cerrar archivo para escribir en este mismo.
+        flujoSalida.close();
     }
 }

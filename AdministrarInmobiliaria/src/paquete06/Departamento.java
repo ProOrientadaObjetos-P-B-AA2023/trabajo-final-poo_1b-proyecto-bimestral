@@ -71,7 +71,7 @@ public class Departamento {
     }
 
     public void setCostoFinal() {
-        //Codigo Faltante
+        this.costoFinal = (numeroMetrosCuadrados * precioMetroCuadrado) + (valorAlicuotaMensual * (double) 12);
     }
 
     public Propietario getPropietario() {

@@ -59,7 +59,7 @@ public class Casa {
     }
 
     public void calcularCostoFinal() {
-        //Codigo faltante
+        this.costoFinal = numeroMetrosCuadrados * precioMetroCuadrado;
     }
 
     public Propietario getPropietario() {

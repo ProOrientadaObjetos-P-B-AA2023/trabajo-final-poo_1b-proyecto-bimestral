@@ -14,7 +14,7 @@ public class Interfaz {
 
     public static void menu_secundario() {
         System.out.println("             ┌────────────────────────────────┐");
-        System.out.println("             │      REGISTRO DE DATOS         │");
+        System.out.println("             │       REGISTRO DE DATOS        │");
         System.out.println("             │────────────────────────────────│");
         System.out.println("             │  1) Propietario                │");
         System.out.println("             │  2) Barrio                     │");

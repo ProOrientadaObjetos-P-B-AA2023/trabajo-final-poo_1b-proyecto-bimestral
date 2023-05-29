@@ -1,10 +1,8 @@
 package paquete02;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Formatter;
+import java.io.*;
 
-public class Propietario {
+public class Propietario implements Serializable {
     //Atributos
     private String nombresPropietario;
     private String apellidosPropietario;
@@ -42,13 +40,36 @@ public class Propietario {
     public String getIdentificacionPropietario() {
         return identificacionPropietario;
     }
+    //toString
+    @Override
+    public String toString() {
+        return "Propietario{" +
+                "nombresPropietario='" + nombresPropietario + '\'' +
+                ", apellidosPropietario='" + apellidosPropietario + '\'' +
+                ", identificacionPropietario='" + identificacionPropietario + '\'' +
+                '}';
+    }
+
     //Metodos
-    public void guardarObjeto() throws FileNotFoundException, IOException, ClassNotFoundException {
-        //Creacion del archivo
-        Formatter flujoSalida = new Formatter("./datos/propietarios.txt");
-        //Escritura en el archivo
-        flujoSalida.format("%s,%s,%s",getNombresPropietario(),getApellidosPropietario(),getIdentificacionPropietario());
-        //Cerrar archivo para escribir en este mismo.
-        flujoSalida.close();
+    public void guardarObjeto(Object propietario) {
+        try {
+            // Guardar el objeto en el archivo
+            ObjectOutputStream objetoSalida = new ObjectOutputStream(new FileOutputStream("./datos/propietario.dat"));
+            objetoSalida.writeObject(propietario);
+            objetoSalida.close();
+            System.out.println("Objeto guardado correctamente.");
+        } catch (Exception e) {
+            System.out.println("Error al guardar el objeto: " + e.getMessage());
+        }
+    }
+
+    public void leerObjeto() {
+        try {
+            ObjectInputStream objetoEntrada = new ObjectInputStream(new FileInputStream("./datos/propietario.dat"));
+            System.out.println((Propietario) objetoEntrada.readObject());
+
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -1,6 +1,10 @@
 package paquete04;
 
-public class Ciudad {
+import paquete02.Propietario;
+
+import java.io.*;
+
+public class Ciudad implements Serializable {
     //Atributos
     private String nombreCiudad;
     private String nombreProvincia;
@@ -27,5 +31,27 @@ public class Ciudad {
 
     public String getNombreProvincia() {
         return nombreProvincia;
+    }
+    //Metodos
+    public void guardarObjeto(Object ciudad) {
+        try {
+            // Guardar el objeto en el archivo
+            ObjectOutputStream objetoSalida = new ObjectOutputStream(new FileOutputStream("./datos/ciudad.dat"));
+            objetoSalida.writeObject(ciudad);
+            objetoSalida.close();
+            System.out.println("Objeto guardado correctamente.");
+        } catch (Exception e) {
+            System.out.println("Error al guardar el objeto: " + e.getMessage());
+        }
+    }
+
+    public void leerObjeto() {
+        try {
+            ObjectInputStream objetoEntrada = new ObjectInputStream(new FileInputStream("./datos/ciudad.dat"));
+            System.out.println((Propietario) objetoEntrada.readObject());
+
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

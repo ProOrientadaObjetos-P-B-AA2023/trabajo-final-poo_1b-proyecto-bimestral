@@ -5,7 +5,9 @@ import paquete03.Barrio;
 import paquete04.Ciudad;
 import paquete05.Constructora;
 
-public class Departamento {
+import java.io.*;
+
+public class Departamento implements Serializable {
     //Atributos
     private Propietario propietario;
     private Constructora constructora;
@@ -112,5 +114,27 @@ public class Departamento {
 
     public double getCostoFinal() {
         return costoFinal;
+    }
+    //Metodo
+    public void guardarObjeto(Object departamento) {
+        try {
+            // Guardar el objeto en el archivo
+            ObjectOutputStream objetoSalida = new ObjectOutputStream(new FileOutputStream("./datos/departamento.dat"));
+            objetoSalida.writeObject(departamento);
+            objetoSalida.close();
+            System.out.println("Objeto guardado correctamente.");
+        } catch (Exception e) {
+            System.out.println("Error al guardar el objeto: " + e.getMessage());
+        }
+    }
+
+    public void leerObjeto() {
+        try {
+            ObjectInputStream objetoEntrada = new ObjectInputStream(new FileInputStream("./datos/departamento.dat"));
+            System.out.println((Propietario) objetoEntrada.readObject());
+
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

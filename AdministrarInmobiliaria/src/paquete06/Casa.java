@@ -5,7 +5,9 @@ import paquete03.Barrio;
 import paquete04.Ciudad;
 import paquete05.Constructora;
 
-public class Casa {
+import java.io.*;
+
+public class Casa implements Serializable {
     //Atributos
     private Propietario propietario;
     private Constructora constructora;
@@ -92,5 +94,27 @@ public class Casa {
 
     public double getCostoFinal() {
         return costoFinal;
+    }
+    //Metodo
+    public void guardarObjeto(Object casa) {
+        try {
+            // Guardar el objeto en el archivo
+            ObjectOutputStream objetoSalida = new ObjectOutputStream(new FileOutputStream("./datos/casa.dat"));
+            objetoSalida.writeObject(casa);
+            objetoSalida.close();
+            System.out.println("Objeto guardado correctamente.");
+        } catch (Exception e) {
+            System.out.println("Error al guardar el objeto: " + e.getMessage());
+        }
+    }
+
+    public void leerObjeto() {
+        try {
+            ObjectInputStream objetoEntrada = new ObjectInputStream(new FileInputStream("./datos/constructora.dat"));
+            System.out.println((Propietario) objetoEntrada.readObject());
+
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
